@@ -12,6 +12,7 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
 #rain.dim { opacity: 0.35; }
 #particles { z-index: 2; pointer-events: none; }
 
+/* ============ СТАРТОВЫЙ ЭКРАН ============ */
 #startOverlay {
   position: fixed;
   inset: 0;
@@ -20,24 +21,44 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 26px;
+  gap: 22px;
   background: radial-gradient(circle at 50% 45%, rgba(60,10,80,.65), rgba(6,0,15,.92));
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   cursor: pointer;
   transition: opacity .8s ease, visibility .8s;
+  padding: 20px;
 }
 #startOverlay.hide { opacity: 0; visibility: hidden; pointer-events: none; }
 
+.top-title {
+  font-size: clamp(22px, 5.2vw, 38px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 1.5px;
+  text-align: center;
+  padding: 0 20px;
+  text-shadow:
+    0 0 14px #ff2e9a,
+    0 0 32px #a855f7,
+    0 0 60px rgba(255, 46, 154, .6);
+  animation: topTitleGlow 2.6s ease-in-out infinite;
+}
+@keyframes topTitleGlow {
+  0%, 100% { text-shadow: 0 0 14px #ff2e9a, 0 0 32px #a855f7, 0 0 60px rgba(255, 46, 154, .6); }
+  50%      { text-shadow: 0 0 22px #ff2e9a, 0 0 50px #a855f7, 0 0 90px rgba(255, 46, 154, .85); }
+}
+
+/* ============ КАЛЕНДАРЬ ============ */
 .calendar {
-  width: clamp(200px, 52vw, 260px);
+  width: clamp(280px, 75vw, 380px);
   background: linear-gradient(180deg, #fff 0%, #fff 100%);
-  border-radius: 18px;
+  border-radius: 22px;
   overflow: hidden;
   box-shadow:
-    0 0 30px rgba(255, 60, 180, .85),
-    0 0 70px rgba(170, 60, 255, .6),
-    0 20px 40px rgba(0, 0, 0, .55);
+    0 0 40px rgba(255, 60, 180, .9),
+    0 0 90px rgba(170, 60, 255, .65),
+    0 24px 50px rgba(0, 0, 0, .6);
   animation: calFloat 2.6s ease-in-out infinite;
   transform-origin: center;
 }
@@ -49,7 +70,7 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
 .cal-top {
   background: linear-gradient(135deg, #ff2e9a, #a855f7);
   color: #fff;
-  padding: 12px 10px 10px;
+  padding: 16px 12px 14px;
   text-align: center;
   position: relative;
 }
@@ -57,9 +78,9 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
 .cal-top::after {
   content: '';
   position: absolute;
-  top: -9px;
-  width: 14px;
-  height: 18px;
+  top: -11px;
+  width: 18px;
+  height: 22px;
   background: #fff;
   border-radius: 50%;
   box-shadow: inset 0 2px 4px rgba(0,0,0,.25);
@@ -68,18 +89,18 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
 .cal-top::after  { right: 24%; }
 
 .cal-month {
-  font-size: clamp(15px, 3.4vw, 19px);
+  font-size: clamp(20px, 4.8vw, 28px);
   font-weight: 900;
-  letter-spacing: 2.5px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .35);
 }
 
 .cal-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 3px;
-  padding: 12px 12px 14px;
+  gap: 4px;
+  padding: 16px 16px 18px;
   background: #fff;
 }
 .cal-cell {
@@ -87,13 +108,13 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(10px, 2.3vw, 13px);
+  font-size: clamp(13px, 3vw, 18px);
   font-weight: 600;
   color: #2a2030;
   border-radius: 50%;
 }
 .cal-cell.head {
-  font-size: clamp(9px, 2vw, 11px);
+  font-size: clamp(11px, 2.6vw, 15px);
   font-weight: 700;
   color: #a855f7;
   text-transform: uppercase;
@@ -104,26 +125,26 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
   position: relative;
   color: #e60039 !important;
   font-weight: 900 !important;
-  font-size: clamp(13px, 3vw, 17px) !important;
+  font-size: clamp(18px, 4.2vw, 24px) !important;
 }
 .cal-cell.mark::before {
   content: '';
   position: absolute;
-  inset: -3px;
-  border: 2.5px solid #e60039;
+  inset: -4px;
+  border: 3px solid #e60039;
   border-radius: 50%;
   box-shadow:
-    0 0 10px rgba(230, 0, 57, .9),
-    inset 0 0 8px rgba(230, 0, 57, .35);
+    0 0 14px rgba(230, 0, 57, .95),
+    inset 0 0 10px rgba(230, 0, 57, .4);
   animation: markPulse 1.6s ease-in-out infinite;
 }
 @keyframes markPulse {
-  0%, 100% { transform: scale(1);    box-shadow: 0 0 10px rgba(230, 0, 57, .9), inset 0 0 8px rgba(230, 0, 57, .35); }
-  50%      { transform: scale(1.12); box-shadow: 0 0 18px rgba(230, 0, 57, 1),  inset 0 0 14px rgba(230, 0, 57, .55); }
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 14px rgba(230, 0, 57, .95), inset 0 0 10px rgba(230, 0, 57, .4); }
+  50%      { transform: scale(1.12); box-shadow: 0 0 22px rgba(230, 0, 57, 1),   inset 0 0 16px rgba(230, 0, 57, .6); }
 }
 
 .start-title {
-  font-size: clamp(20px, 4.6vw, 32px);
+  font-size: clamp(26px, 6vw, 44px);
   font-weight: 900;
   color: #fff;
   letter-spacing: 2px;
@@ -137,6 +158,7 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
   50%      { text-shadow: 0 0 26px #ff2e9a, 0 0 70px #a855f7; }
 }
 
+/* ============ КНИЖКА ============ */
 #bookStage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; opacity: 0; pointer-events: none; transition: opacity 1s ease; perspective: 2600px; }
 #bookStage.active { opacity: 1; pointer-events: auto; }
 .book { position: relative; width: min(90vw, 820px); height: min(60vh, 500px); transform-style: preserve-3d; transition: transform 1.4s cubic-bezier(.6,.05,.3,1), opacity .9s ease .3s; }
@@ -157,8 +179,10 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
 .book-hint { font-size: 12px; letter-spacing: 3px; color: rgba(255,140,220,.75); text-transform: uppercase; animation: hintPulse 2s ease-in-out infinite; }
 @keyframes hintPulse { 0%, 100% { opacity: .4; } 50% { opacity: 1; } }
 
+/* ============ СЕРДЦЕ ИЗ ФОТО ============ */
 #heartStage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 11; opacity: 0; pointer-events: none; transition: opacity 1.2s ease; }
 #heartStage.active { opacity: 1; }
+#heartStage.fade-out { opacity: 0; transition: opacity 2s ease; }
 #heartContainer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 .center-photo {
@@ -238,6 +262,124 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
 .center-beat { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: clamp(60px, 14vw, 150px); opacity: 0; pointer-events: none; z-index: 0; filter: drop-shadow(0 0 18px rgba(255, 60, 180, 0.55)) drop-shadow(0 0 40px rgba(170, 60, 255, 0.35)); animation: centerIn 1.5s ease .8s forwards, centerPulse 2.2s ease-in-out 2.3s infinite; }
 @keyframes centerIn { to { opacity: .06; } }
 @keyframes centerPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.12); } }
+
+/* ============ ФИНАЛ — РОЗА ============ */
+#roseStage {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, rgba(60,0,30,.55), rgba(6,0,15,.98));
+  transition: opacity 2.4s ease, visibility 2.4s;
+  padding: 20px;
+}
+#roseStage.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Сама роза 🌹 */
+.rose {
+  font-size: clamp(140px, 40vw, 260px);
+  line-height: 1;
+  opacity: 0;
+  transform: scale(0.2) rotate(-30deg);
+  filter:
+    drop-shadow(0 0 30px rgba(230, 0, 57, .95))
+    drop-shadow(0 0 80px rgba(255, 46, 154, .75))
+    drop-shadow(0 0 140px rgba(230, 0, 57, .5));
+  animation:
+    roseIn 2.6s cubic-bezier(.34, 1.3, .5, 1) .8s forwards,
+    rosePulse 3s ease-in-out 3.6s infinite;
+}
+@keyframes roseIn {
+  0%   { opacity: 0; transform: scale(.2) rotate(-30deg); }
+  60%  { opacity: 1; transform: scale(1.15) rotate(8deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes rosePulse {
+  0%, 100% {
+    transform: scale(1);
+    filter:
+      drop-shadow(0 0 30px rgba(230, 0, 57, .95))
+      drop-shadow(0 0 80px rgba(255, 46, 154, .75))
+      drop-shadow(0 0 140px rgba(230, 0, 57, .5));
+  }
+  50% {
+    transform: scale(1.08);
+    filter:
+      drop-shadow(0 0 45px rgba(230, 0, 57, 1))
+      drop-shadow(0 0 110px rgba(255, 46, 154, 1))
+      drop-shadow(0 0 180px rgba(230, 0, 57, .8));
+  }
+}
+
+/* Вуаль из мелких лепестков, летящих по кругу */
+.rose-leaves {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.rose-leaf {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 24px;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(230, 0, 57, .9));
+  animation: leafFloat 5s ease-out forwards;
+}
+@keyframes leafFloat {
+  0%   { transform: translate(-50%, -50%) scale(.4); opacity: 0; }
+  20%  { opacity: 1; }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.6) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+/* Надпись «Это тебе» */
+.rose-text {
+  font-size: clamp(28px, 7vw, 56px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 3px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  text-shadow:
+    0 0 14px #e60039,
+    0 0 32px #ff2e9a,
+    0 0 70px rgba(230, 0, 57, .8);
+  animation:
+    roseTextIn 2s cubic-bezier(.2, .8, .3, 1) 2.4s forwards,
+    roseTextGlow 2.8s ease-in-out 4.4s infinite;
+}
+@keyframes roseTextIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes roseTextGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 14px #e60039,
+      0 0 32px #ff2e9a,
+      0 0 70px rgba(230, 0, 57, .8);
+  }
+  50% {
+    text-shadow:
+      0 0 22px #e60039,
+      0 0 60px #ff2e9a,
+      0 0 120px rgba(230, 0, 57, 1);
+  }
+}
 </style>
 </head>
 <body>
@@ -246,6 +388,8 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
 <canvas id="particles"></canvas>
 
 <div id="startOverlay">
+  <div class="top-title">Сегодня особенный день!</div>
+
   <div class="calendar">
     <div class="cal-top">
       <div class="cal-month">Ноябрь</div>
@@ -319,6 +463,13 @@ canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display:
 
 <div id="heartStage">
   <div id="heartContainer"></div>
+</div>
+
+<!-- ФИНАЛЬНАЯ СЦЕНА С РОЗОЙ -->
+<div id="roseStage">
+  <div class="rose-leaves" id="roseLeaves"></div>
+  <div class="rose">🌹</div>
+  <div class="rose-text">Это тебе</div>
 </div>
 
 <script>
@@ -711,37 +862,29 @@ async function runShow() {
   await sleep(400);
   var numFS = Math.min(W * 0.42, H * 0.42);
 
-  // ===== 3 =====
   playTick(0.85);
   await showShape(function () { return textToPoints(['3'], numFS, 0, W < 640 ? 500 : 900); }, 650, 750);
 
-  // ===== 2 =====
   playTick(0.85);
   await showShape(function () { return textToPoints(['2'], numFS, 0, W < 640 ? 500 : 900); }, 650, 750);
 
-  // ===== 1 =====
   playTick(0.85);
   await showShape(function () { return textToPoints(['1'], numFS, 0, W < 640 ? 500 : 900); }, 650, 750);
 
-  // ===== СЕГОДНЯ =====
   playTick(0.85);
   var fs1 = Math.min(W * 0.16, H * 0.28);
   await showShape(function () { return textToPoints(['Сегодня'], fs1, 0, W < 640 ? 500 : 900); }, 650, 750);
 
-  // ===== ТВОЙ =====
   playTick(0.85);
   var fs2 = Math.min(W * 0.30, H * 0.45);
   await showShape(function () { return textToPoints(['твой'], fs2, 0, W < 640 ? 500 : 900); }, 650, 750);
 
-  // ===== BIRTHDAY =====
   playTick(0.95);
   var fs3 = Math.min(W * 0.14, H * 0.24);
   await showShape(function () { return textToPoints(['Birthday'], fs3, 0, W < 640 ? 800 : 1300); }, 700, 900);
 
-  // Запускаем музыку после появления слова Birthday
   startMusic();
 
-  // ===== СЕРДЦЕ =====
   pulseOn = true;
   await showShape(function () { return heartFill(W < 640 ? 700 : 1400); }, 1100, 2200);
   pulseOn = false;
@@ -917,6 +1060,9 @@ function startFinalMagic() {
   setInterval(spawnSparkle, 240);
   for (var i = 0; i < 8; i++) setTimeout(spawnFloatingHeart, i * 90);
   for (var j = 0; j < 12; j++) setTimeout(spawnSparkle, j * 60);
+
+  // Через 5 секунд после финала — переход к розе
+  setTimeout(showRose, 5000);
 }
 
 function spawnFloatingHeart() {
@@ -942,6 +1088,77 @@ function spawnSparkle() {
   s.style.width = size + 'px'; s.style.height = size + 'px';
   heartStage.appendChild(s);
   setTimeout(function () { s.remove(); }, 2800);
+}
+
+// ============================================================
+//  ФИНАЛ — РОЗА
+// ============================================================
+var roseStage = document.getElementById('roseStage');
+var roseLeaves = document.getElementById('roseLeaves');
+
+function showRose() {
+  // Плавно гасим сцену с сердцем
+  heartStage.classList.add('fade-out');
+
+  // Через 1.5 сек показываем розу
+  setTimeout(function () {
+    heartStage.style.display = 'none';
+    roseStage.classList.add('active');
+    spawnRoseLeaves();
+  }, 1500);
+}
+
+function spawnRoseLeaves() {
+  // Много мелких лепестков/сердечек, летящих наружу от центра
+  var symbols = ['🌹', '❀', '❁', '✿', '❤', '♥', '💕'];
+  var count = 28;
+
+  for (var i = 0; i < count; i++) {
+    (function (idx) {
+      setTimeout(function () {
+        var leaf = document.createElement('div');
+        leaf.className = 'rose-leaf';
+        leaf.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+        var angle = Math.random() * Math.PI * 2;
+        var distance = 120 + Math.random() * 260;
+        var dx = Math.cos(angle) * distance;
+        var dy = Math.sin(angle) * distance;
+        var rot = (Math.random() - 0.5) * 720;
+
+        leaf.style.setProperty('--dx', dx + 'px');
+        leaf.style.setProperty('--dy', dy + 'px');
+        leaf.style.setProperty('--rot', rot + 'deg');
+        leaf.style.fontSize = (14 + Math.random() * 20) + 'px';
+        leaf.style.animationDuration = (3.5 + Math.random() * 2.5) + 's';
+        leaf.style.animationDelay = (Math.random() * 0.6) + 's';
+
+        roseLeaves.appendChild(leaf);
+        setTimeout(function () { leaf.remove(); }, 6500);
+      }, idx * 70);
+    })(i);
+  }
+
+  // Повторяем волны лепестков периодически
+  setInterval(function () {
+    if (!roseStage.classList.contains('active')) return;
+    for (var k = 0; k < 10; k++) {
+      setTimeout(function () {
+        var leaf = document.createElement('div');
+        leaf.className = 'rose-leaf';
+        leaf.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        var angle = Math.random() * Math.PI * 2;
+        var distance = 140 + Math.random() * 260;
+        leaf.style.setProperty('--dx', (Math.cos(angle) * distance) + 'px');
+        leaf.style.setProperty('--dy', (Math.sin(angle) * distance) + 'px');
+        leaf.style.setProperty('--rot', ((Math.random() - 0.5) * 720) + 'deg');
+        leaf.style.fontSize = (14 + Math.random() * 18) + 'px';
+        leaf.style.animationDuration = (4 + Math.random() * 2) + 's';
+        roseLeaves.appendChild(leaf);
+        setTimeout(function () { leaf.remove(); }, 6500);
+      }, k * 100);
+    }
+  }, 4000);
 }
 
 // ============================================================
